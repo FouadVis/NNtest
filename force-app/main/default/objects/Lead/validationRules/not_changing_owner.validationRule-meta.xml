@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>not_changing_owner</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISCHANGED(OwnerId),
+				OR(ISBLANK(TEXT(LeadSource)),
+							AND(ISBLANK(NumberOfEmployees),
+											NOT(OR( $Profile.Name =&apos;System Administrator&apos;, $Profile.Name =&apos;Contract Manager&apos;))),
+							AND(ISBLANK(Country),
+											NOT( $Profile.Name =&apos;System Administrator&apos;))
+							)
+				)</errorConditionFormula>
+    <errorMessage>To change the owner some information must be fullfiled</errorMessage>
+</ValidationRule>
